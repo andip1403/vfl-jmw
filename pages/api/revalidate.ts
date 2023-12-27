@@ -7,42 +7,49 @@
  * 1. Go to the API section of your Sanity project on sanity.io/manage or run `npx sanity hook create`
  * 2. Click "Create webhook"
  * 3. Set the URL to https://YOUR_NEXTJS_SITE_URL/api/revalidate
- * 4. Trigger on: "Create", "Update", and "Delete"
- * 5. Filter: _type == "post" || _type == "author" || _type == "settings"
- * 6. Projection: Leave empty
- * 7. HTTP method: POST
- * 8. API version: v2021-03-25
- * 9. Include drafts: No
+ * 4. Dataset: Choose desired dataset or leave at default "all datasets"
+ * 5. Trigger on: "Create", "Update", and "Delete"
+ * 6. Filter: _type == "post" || _type == "author" || _type == "settings"
+ * 7. Projection: Leave empty
+ * 8. Status: Enable webhook
+ * 9. HTTP method: POST
  * 10. HTTP Headers: Leave empty
- * 11. Secret: Set to the same value as SANITY_REVALIDATE_SECRET (create a random one if you haven't)
- * 12. Save the cofiguration
- * 13. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
- * 14. Redeploy with `npx vercel --prod` to apply the new environment variable
+ * 11. API version: v2021-03-25
+ * 12. Include drafts: No
+ * 13. Secret: Set to the same value as SANITY_REVALIDATE_SECRET (create a random secret if you haven't yet)
+ * 14. Save the cofiguration
+ * 15. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
+ * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
 
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient, groq, type SanityClient } from 'next-sanity'
-import { type ParseBody, parseBody } from 'next-sanity/webhook'
+import {
+  createClient,
+  groq,
+  type SanityClient,
+  type SanityDocument,
+} from 'next-sanity'
+import { parseBody, type ParsedBody } from 'next-sanity/webhook'
 
 export { config } from 'next-sanity/webhook'
 
 export default async function revalidate(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   try {
     const { body, isValidSignature } = await parseBody(
       req,
-      process.env.SANITY_REVALIDATE_SECRET
+      process.env.SANITY_REVALIDATE_SECRET,
     )
-    if (isValidSignature === false) {
+    if (!isValidSignature) {
       const message = 'Invalid signature'
       console.log(message)
       return res.status(401).send(message)
     }
 
-    if (typeof body._id !== 'string' || !body._id) {
+    if (typeof body?._id !== 'string' || !body?._id) {
       const invalidId = 'Invalid _id'
       console.error(invalidId, { body })
       return res.status(400).send(invalidId)
@@ -63,7 +70,10 @@ export default async function revalidate(
 type StaleRoute = '/' | `/posts/${string}`
 
 async function queryStaleRoutes(
-  body: Pick<ParseBody['body'], '_type' | '_id' | 'date' | 'slug'>
+  body: Pick<
+    ParsedBody<SanityDocument>['body'],
+    '_type' | '_id' | 'date' | 'slug'
+  >,
 ): Promise<StaleRoute[]> {
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
 
@@ -80,7 +90,7 @@ async function queryStaleRoutes(
         groq`count(
           *[_type == "post"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
         )`,
-        { date: body.date }
+        { date: body.date },
       )
       // If there's less than 3 posts with a newer date, we need to revalidate everything
       if (moreStories < 3) {
@@ -114,10 +124,10 @@ async function queryAllRoutes(client: SanityClient): Promise<StaleRoute[]> {
 
 async function mergeWithMoreStories(
   client,
-  slugs: string[]
+  slugs: string[],
 ): Promise<string[]> {
   const moreStories = await client.fetch(
-    groq`*[_type == "post"] | order(date desc, _updatedAt desc) [0...3].slug.current`
+    groq`*[_type == "post"] | order(date desc, _updatedAt desc) [0...3].slug.current`,
   )
   if (slugs.some((slug) => moreStories.includes(slug))) {
     const allSlugs = await _queryAllRoutes(client)
@@ -129,13 +139,13 @@ async function mergeWithMoreStories(
 
 async function queryStaleAuthorRoutes(
   client: SanityClient,
-  id: string
+  id: string,
 ): Promise<StaleRoute[]> {
   let slugs = await client.fetch(
     groq`*[_type == "author" && _id == $id] {
     "slug": *[_type == "post" && references(^._id)].slug.current
   }["slug"][]`,
-    { id }
+    { id },
   )
 
   if (slugs.length > 0) {
@@ -148,11 +158,11 @@ async function queryStaleAuthorRoutes(
 
 async function queryStalePostRoutes(
   client: SanityClient,
-  id: string
+  id: string,
 ): Promise<StaleRoute[]> {
   let slugs = await client.fetch(
     groq`*[_type == "post" && _id == $id].slug.current`,
-    { id }
+    { id },
   )
 
   slugs = await mergeWithMoreStories(client, slugs)

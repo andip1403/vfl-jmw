@@ -4,7 +4,7 @@ import type { NextRequest, NextResponse } from 'next/server'
 import type { PageConfig } from 'next/types'
 import { createClient } from 'next-sanity'
 
-export const config: PageConfig = { runtime: 'experimental-edge' }
+export const config: PageConfig = { runtime: 'edge' }
 
 import { height, OpenGraphImage, width } from 'components/OpenGraphImage'
 import * as demo from 'lib/demo.data'
@@ -12,7 +12,7 @@ import { Settings, settingsQuery } from 'lib/sanity.queries'
 
 export default async function og(req: NextRequest, res: NextResponse) {
   const font = fetch(new URL('public/Inter-Bold.woff', import.meta.url)).then(
-    (res) => res.arrayBuffer()
+    (res) => res.arrayBuffer(),
   )
   const { searchParams } = new URL(req.url)
 
@@ -41,6 +41,6 @@ export default async function og(req: NextRequest, res: NextResponse) {
           weight: 700,
         },
       ],
-    }
+    },
   )
 }
