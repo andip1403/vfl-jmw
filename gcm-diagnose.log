@@ -1,0 +1,184 @@
+﻿Diagnose log at 2023-12-27T15:36:32Z
+
+AppPath: /usr/local/bin/git-credential-manager
+InstallDir: /usr/local/share/gcm-core/
+Version: 2.2.2
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: macOS
+OSVersion: 14.2.1
+Reading environment variables... OK
+ Variables:
+PAGER=less
+LANG=en_US.UTF-8
+__CFBundleIdentifier=com.microsoft.VSCode
+SHELL=/bin/zsh
+JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+PYENV_SHELL=zsh
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+_=/opt/homebrew/bin/git
+GIT_TRACE2_PARENT_SID=1d9c36da-48bc-4fea-af82-e732fc6bf6c3
+XPC_FLAGS=0x0
+LSCOLORS=Gxfxcxdxbxegedabagacad
+MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/homebrew/share/man::
+GIT_ASKPASS=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
+HOME=/Users/aprantl
+HOMEBREW_REPOSITORY=/opt/homebrew
+VSCODE_INJECTION=1
+PATH=/opt/homebrew/opt/git/libexec/git-core:/Users/aprantl/.pyenv/shims:/Users/aprantl/.local/bin:/Users/aprantl/.pyenv/bin:/opt/homebrew/opt/node@18/bin:/opt/Sencha/Cmd/7.7.0.36:/Users/aprantl/Library/Python/3.11/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+XPC_SERVICE_NAME=0
+MallocNanoZone=0
+ZSH=/Users/aprantl/.oh-my-zsh
+PYENV_VERSION=3.11.4
+LaunchInstanceID=BDD306E6-96E1-460D-85CB-24849FB1E999
+SHLVL=1
+GROOVY_HOME=/usr/local/opt/groovy/libexec
+ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+VSCODE_GIT_IPC_HANDLE=/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/vscode-git-15ae3b04f6.sock
+GIT_EXEC_PATH=/opt/homebrew/opt/git/libexec/git-core
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.OmH3p2CAta/Listeners
+ZDOTDIR=/Users/aprantl
+VSCODE_GIT_ASKPASS_MAIN=/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
+PWD=/Users/aprantl/Projects/private/vfl-jmw
+COLORTERM=truecolor
+JAVA_17_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home
+TERM=xterm-256color
+TERM_PROGRAM_VERSION=1.85.1
+USER=aprantl
+LESS=-R
+COMMAND_MODE=unix2003
+INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info:
+TERM_PROGRAM=vscode
+JAVA_11_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+USER_ZDOTDIR=/Users/aprantl
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+VSCODE_GIT_ASKPASS_NODE=/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)
+OLDPWD=/Users/aprantl/Projects/private/vfl-jmw
+PIPX_BIN_DIR=/Users/aprantl/.local/bin
+DOCKER_HOST=unix:///Users/aprantl/.colima/default/docker.sock
+JAVA_8_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home
+HOMEBREW_PREFIX=/opt/homebrew
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=--ms-enable-electron-run-as-node
+LOGNAME=aprantl
+TMPDIR=/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/
+SECURITYSESSIONID=186ab
+PYENV_ROOT=/Users/aprantl/.pyenv
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is '/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/'...
+Checking basic file I/O...
+Writing to temporary file '/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/8e694f11a80ce4dea809f8b1'... OK
+Reading from temporary file '/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/8e694f11a80ce4dea809f8b1'... OK
+Deleting temporary file '/var/folders/fd/9ygw47812fb4dgd5q5kw2_0m0000gn/T/8e694f11a80ce4dea809f8b1'... OK
+Testing IFileSystem instance...
+UserHomePath: /Users/aprantl
+UserDataDirectoryPath: /Users/aprantl/.gcm
+GetCurrentDirectory(): /Users/aprantl/Projects/private/vfl-jmw
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com... OK
+Sending HEAD request to https://example.com... OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:51818/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.43.0'
+Locating current repository... OK
+Git repository at '/Users/aprantl/Projects/private/vfl-jmw/.git'
+Listing all Git configuration... OK
+Git configuration:
+file:/opt/homebrew/etc/gitconfig	credential.helper=osxkeychain
+file:/Users/aprantl/.gitconfig	credential.helper=osxkeychain
+file:/Users/aprantl/.gitconfig	credential.helper=
+file:/Users/aprantl/.gitconfig	credential.helper=/usr/local/share/gcm-core/git-credential-manager
+file:/Users/aprantl/.gitconfig	user.email=aprantl@coremedia.com
+file:/Users/aprantl/.gitconfig	user.name=aprantl
+file:/Users/aprantl/.gitconfig	branch.autosetuprebase=always
+file:/Users/aprantl/.gitconfig	diff.renamelimit=0
+file:/Users/aprantl/.gitconfig	core.autocrlf=input
+file:/Users/aprantl/.gitconfig	filter.lfs.process=git-lfs filter-process
+file:/Users/aprantl/.gitconfig	filter.lfs.required=true
+file:/Users/aprantl/.gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:/Users/aprantl/.gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:/Users/aprantl/.gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=true
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.ignorecase=true
+file:.git/config	core.precomposeunicode=true
+file:.git/config	remote.origin.url=https://github.com/andip1403/vfl-jmw.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+file:.git/config	branch.main.rebase=true
+file:.git/config	branch.sanity-3rdparty-update.vscode-merge-base=main
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: /Users/aprantl/.local/.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: /Users/aprantl/.local/.IdentityService/msal.cache
+MacKeyChainAccountName: MSALCache
+MacKeyChainServiceName: Microsoft.Developer.IdentityService
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
